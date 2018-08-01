@@ -25,7 +25,9 @@ export default {
     // this.$axios.get("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E4%B8%8A%E6%B5%B7s&json=1&cb=lgd")
     // .then(res => {
     //   console.log(res.data.chengpinDetails[0].content
-    let url = this.HOST + "su?wd=上海&json=1&cb=lgd";
+    let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=上海&json=1&cb=lgd";
+    const that = this;
+    console.log('that.filterData outer of axios scope:', that.filterData)
     this.$axios.get(url,{
       params:{
         count:5,
@@ -34,14 +36,17 @@ export default {
     })
     .then(res => {
       console.log(res);
-      this.filterData(res);
+      console.log('this in axios scope:', this)
+      console.log('this.filterData in axios scope:', this.filterData)
+      console.log('that.filterData in axios scope:', that.filterData)
+      that.filterData(res)
     })
     .catch(error => {
       console.log(error);
     })
   },
-  method:{
-    filterData(res){
+  methods:{
+      filterData(res){
       var restData = [];
       var resultData = [];
       let num1 = res.data.indexOf('(');
@@ -51,7 +56,7 @@ export default {
        resultData = resData.g[i].q;
       }
       this.msgs = resultData;
-      console.log(msgs);
+      // console.log(msgs);
     }
   }
 }
