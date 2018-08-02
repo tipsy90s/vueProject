@@ -21,7 +21,8 @@ import qs from "qs";
 export default {
   data(){
     return{
-      msgs:[]
+      message:false,
+      msgs:[],
     }
   },
   created(){
