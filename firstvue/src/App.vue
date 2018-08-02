@@ -4,15 +4,18 @@
     <h4>
       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
       My Browser 
-      </h4>
-    <input type="text" value="">
-    <button type="submit"><a href="https://www.baidu.com/">搜索</a></button>
-  <div v-for="msg in msgs"><p>{{ msg }}</p>></div>
+    </h4>
+    <input id="inputValue" type="text" v-model="message" placeholder="do what you want!" >
+    <p>你是：{{ message }}</p>
+    <button type="submit" @click="searchKey">搜索</button>
+    <li v-for="msg in msgs">
+      <p>{{ msg }}</p>
+    </li>
   </div>
   <!-- <p>{{ msg }}</p> -->
 </template>
 <script>
-
+// const value =document.getElementById("inputValue").value;
 import qs from "qs";
 
 export default {
@@ -25,25 +28,7 @@ export default {
     // this.$axios.get("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E4%B8%8A%E6%B5%B7s&json=1&cb=lgd")
     // .then(res => {
     //   console.log(res.data.chengpinDetails[0].content
-    let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=上海&json=1&cb=lgd";
-    const that = this;
-    console.log('that.filterData outer of axios scope:', that.filterData)
-    this.$axios.get(url,{
-      params:{
-        count:5,
-        start:1,
-      }
-    })
-    .then(res => {
-      console.log(res);
-      console.log('this in axios scope:', this)
-      console.log('this.filterData in axios scope:', this.filterData)
-      console.log('that.filterData in axios scope:', that.filterData)
-      that.filterData(res)
-    })
-    .catch(error => {
-      console.log(error);
-    })
+    
   },
   methods:{
       filterData(res){
@@ -53,10 +38,31 @@ export default {
       let num2 = res.data.indexOf(')');
       let resData = JSON.parse(res.data.substring(num1 + 1, num2));
       for (var i=0;i<resData.g.length;i++){
-       resultData = resData.g[i].q;
+        resultData[i] = resData.g[i].q;
       }
       this.msgs = resultData;
-      // console.log(msgs);
+      console.log(this.msgs);
+    },
+    searchKey(){
+      let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" + "shang" + "&json=1&cb=lgd";
+      const that = this;
+      console.log('that.filterData outer of axios scope:', that.filterData)
+      this.$axios.get(url,{
+        params:{
+          count:5,
+          start:1,
+        }
+      })
+      .then(res => {
+        console.log(res);
+        console.log('this in axios scope:', this)
+        console.log('this.filterData in axios scope:', this.filterData)
+        console.log('that.filterData in axios scope:', that.filterData)
+        that.filterData(res)
+      })
+      .catch(error => {
+        console.log(error);
+      })
     }
   }
 }
