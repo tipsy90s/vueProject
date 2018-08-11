@@ -5,18 +5,21 @@
       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
       My Browser 
     </h4>
-    <input id= "inputIn" type="text" v-model="message" placeholder="do what you want !"  @oninput="render" />
+    <input id= "inputIn" type="text" v-model="message" placeholder="do what you want !"  @input="renderInput" />
     <button id="seachButton" type="submit" @click="searchKey" ><a ref="forSearch" id="forSearch" href="">搜索</a></button>
-    <!-- <p>{{ message }} </p> -->
-    <li v-for="msg in msgs">
-      <p>{{ msg }}</p>
-    </li>
+   <div id="list"> 
+      <li v-for="msg in msgs">
+        <a href="javascript:void(0)" @cilck="getValue">{{ msg }}</a>
+      </li>
+   </div>
 
     <div id="nav">
-    <li id="firstnav" @mouseover="over" @mouseout="out">热点事件</li>
-    <li id="secondnav" @mouseover="over1">时间</li>
-    </div
-    >
+      <router-link to="/home"></router-link>
+      <router-view></router-view>
+
+    <!-- <li id="firstnav" @mouseover="over" @mouseout="out">热点事件</li>
+    <li id="secondnav" @mouseover="over1">时间</li> -->
+    </div>
     <!-- <button id="seachButton1"  type="submit" @click="changeBackground" >切换</button> -->
 
     <div class="video">
@@ -83,11 +86,11 @@ export default {
     console.log(this.msgs);
     },
 
-    render(){    
+    renderInput(){    
      //input框里拿到的值替换到 url 上。
       let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" +  this.message  + "&json=1&cb=lgd";
       const that = this;
-      console.log('that.filterData outer of axios scope:', that.filterData)
+      // console.log('that.filterData outer of axios scope:', that.filterData)
       this.$axios.get(url,{
         params:{
           count:5,
@@ -115,14 +118,17 @@ export default {
     // changeBackground(){
     //   this.$refs.mainPage.style="background-image: url(../photos/6.jpg);background-size: 100% 100%;";
     // }
-    over(){
-      alert("hello");
-    },
-    out(){
-      alert("world");
-    },
-    over1(){
-      alert(time);
+    // over(){
+    //   alert("hello");
+    // },
+    // out(){
+    //   alert("world");
+    // },
+    // over1(){
+    //   alert(time);
+    // },
+    getValue(){
+      this.message = this.msgs;
     },
   }
 }
@@ -137,6 +143,7 @@ export default {
     background-image: url(../photos/7.jpg);
     background-size: 100% 100%;
     font-family: hakuyoxingshu7000;
+    z-index: 1;
   }
 
   h2,h4 {
@@ -166,6 +173,7 @@ export default {
     text-align: left;
     width:300px;
     height:120px;
+    z-index: 1;
   }
 
   .music {
@@ -175,6 +183,7 @@ export default {
     font-size: 40px;
     text-align: left;
     width:25%;
+    z-index: 1;
   }
 
   .communication {
@@ -184,6 +193,7 @@ export default {
     font-size: 40px;
     text-align: left;
     width:25%;
+    z-index: 1;
   }
 
   ul li {
@@ -215,6 +225,20 @@ export default {
     left: 5%;
     top: -25%;
     text-align: left;
+  }
+
+  #list {
+    position: relative;
+    top: 0;
+    left: 20.6%;
+    width: 700px;
+    background: white;
+    z-index: 999;
+  }
+
+  #list li{
+    text-align: left;
+    list-style: none;
   }
 
 </style>
