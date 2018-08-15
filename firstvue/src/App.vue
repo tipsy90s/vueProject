@@ -5,12 +5,14 @@
       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
       My Browser 
     </h4>
-    <input id= "inputIn" type="text" v-model="message" placeholder="do what you want !"  @input="renderInput" />
-    <button id="seachButton" type="submit" @click="searchKey" ><a ref="forSearch" id="forSearch" href="">搜索</a></button>
-   <div id="list"> 
-      <li v-for="msg in msgs">
-        <a href="javascript:void(0)" @cilck="getValue">{{ msg }}</a>
-      </li>
+    <input id= "inputIn" type="text" v-model="message" placeholder="do what you want !" ref="changeValues"  @input="renderInput" />
+    <button id="seachButton" type="submit" @click="searchKey" ><a ref="forSearch" id="forSearch" href="javascript:void(0)">搜索</a></button>
+   <div id="list">
+     <ul id="valueList" ref="getValues"> 
+        <li v-for="msg in msgs">
+          <a href="javascript:void(0)"  @click="getValue">{{ msg }}</a>
+        </li>
+     </ul>
    </div>
 
     <div id="nav">
@@ -25,7 +27,7 @@
     <div class="video">
       <ul >
         <h5>watch you want</h5>
-        <li><a href="">优酷</a></li>
+        <li><a href="https://www.youku.com/">优酷</a></li>
         <li><a href="">爱奇艺</a></li>
         <li><a href="">腾讯视频</a></li>
         <li><a href="">土豆视频</a></li>
@@ -82,7 +84,7 @@ export default {
       for (var i=0;i<resData.s.length;i++){
         resultData[i] = resData.g[i].q;
     }
-    this.msgs = resultData;
+    this.msgs = resultData.toString().split(this.message).splice();
     console.log(this.msgs);
     },
 
@@ -112,23 +114,19 @@ export default {
     searchKey(){
       if(this.messgae != '' ){
         console.log(this.message);
-        this.$refs.forSearch.href = "https://www.baidu.com/s?wd=" + this.message;
+        // 将输入框的值替换到url
+        this.$refs.forSearch.href = "https://www.baidu.com/s?wd=" + this.$refs.changeValues.value;
       }
     },
-    // changeBackground(){
-    //   this.$refs.mainPage.style="background-image: url(../photos/6.jpg);background-size: 100% 100%;";
-    // }
-    // over(){
-    //   alert("hello");
-    // },
-    // out(){
-    //   alert("world");
-    // },
-    // over1(){
-    //   alert(time);
-    // },
+    
     getValue(){
-      this.message = this.msgs;
+      let inputValue = this.$refs.changeValues;
+      this.$refs.getValues.onclick = function(event){
+        var targetNode = event.target;
+        if(targetNode.nodeName == 'A'){
+          inputValue.value = targetNode.innerText;
+        }
+      }
     },
   }
 }
@@ -149,6 +147,7 @@ export default {
   h2,h4 {
     font-size: 40px;
   }
+
   h5 {
     margin-top: 5px;
     margin-bottom: 30px;
@@ -199,6 +198,12 @@ export default {
   ul li {
     list-style: none;
     margin-bottom: 10px;
+    padding: 0px;
+  }
+
+  #valueList {
+    padding-left: 10px;
+    margin-top: 0;
   }
 
   a {
@@ -210,7 +215,12 @@ export default {
     width: 70px;
     height: 35px;
     font-size: 20px;
-    border-radius: 35%;
+    background: #3385ff;
+  }
+
+  #forSearch {
+    font-family: hakuyoxingshu7000;
+    color: white;
   }
 
   #firstnav,#secondnav  {
@@ -233,12 +243,15 @@ export default {
     left: 20.6%;
     width: 700px;
     background: white;
-    z-index: 999;
+    z-index: 5;
   }
 
   #list li{
     text-align: left;
     list-style: none;
+    font-family: hakuyoxingshu7000;
+    font-size: 20px;
+    margin-bottom: 5px;
   }
 
 </style>

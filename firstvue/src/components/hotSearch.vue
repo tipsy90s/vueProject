@@ -18,7 +18,11 @@ export default({
                 id:2,
             },
         }
-    }
+    },
+
+   methods:{
+    
+    },
 })
 </script>
 
