@@ -16,42 +16,14 @@
    </div>
 
     <div id="nav">
-      <router-link to="/home"></router-link>
+      <router-link to="/webs">名站大全</router-link>
+       &nbsp &nbsp &nbsp &nbsp 
+      <router-link to="/videos">影视大全</router-link></router-link>
+       &nbsp &nbsp &nbsp &nbsp
+      <router-link to="/music">众听音乐</router-link>
+       &nbsp &nbsp &nbsp &nbsp
+       <router-link to="/news">新闻头条</router-link></router-link>
       <router-view></router-view>
-
-    <!-- <li id="firstnav" @mouseover="over" @mouseout="out">热点事件</li>
-    <li id="secondnav" @mouseover="over1">时间</li> -->
-    </div>
-    <!-- <button id="seachButton1"  type="submit" @click="changeBackground" >切换</button> -->
-
-    <div class="video">
-      <ul >
-        <h5>watch you want</h5>
-        <li><a href="https://www.youku.com/">优酷</a></li>
-        <li><a href="">爱奇艺</a></li>
-        <li><a href="">腾讯视频</a></li>
-        <li><a href="">土豆视频</a></li>
-      </ul>
-    </div>
-    
-    <div class="music">
-      <ul>
-        <h5>listen you like</h5>
-        <li><a href="">网易云</a></li>
-        <li><a href="">酷狗</a></li>
-        <li><a href="">QQ音乐</a></li>
-        <li><a href="">百度音乐</a></li>
-      </ul>
-    </div>
-
-    <div class="communication">
-    <ul>
-      <h5>share you life</h5>
-      <li><a href="">QQ空间</a></li>
-      <li><a href="">微博</a></li>
-      <li><a href="">微信</a></li>
-      <li><a href="">twitch</a></li>
-    </ul>
     </div>
   </div>
 </template>
@@ -84,8 +56,7 @@ export default {
       for (var i=0;i<resData.s.length;i++){
         resultData[i] = resData.g[i].q;
     }
-    this.msgs = resultData.toString().split(this.message).splice();
-    console.log(this.msgs);
+    this.msgs = resultData;
     },
 
     renderInput(){    
@@ -164,37 +135,6 @@ export default {
     font-size: 20px;
   }
 
-  .video {
-    position: relative;
-    left: 5%;
-    top:  0;
-    font-size: 40px;
-    text-align: left;
-    width:300px;
-    height:120px;
-    z-index: 1;
-  }
-
-  .music {
-    position: relative;
-    left: 38%;
-     top:  -25%;
-    font-size: 40px;
-    text-align: left;
-    width:25%;
-    z-index: 1;
-  }
-
-  .communication {
-    position: relative;
-    left: 70%;
-    top:  -72%;
-    font-size: 40px;
-    text-align: left;
-    width:25%;
-    z-index: 1;
-  }
-
   ul li {
     list-style: none;
     margin-bottom: 10px;
@@ -232,9 +172,10 @@ export default {
 
   #nav {
     position: relative;
-    left: 5%;
-    top: -25%;
+    left: 17%;
+    top: 5%;
     text-align: left;
+    font-size: 30px;
   }
 
   #list {
