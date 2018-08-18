@@ -30,7 +30,7 @@
 <script>
 const time = new Date().toLocaleTimeString();
 
-import qs from "qs";
+// import qs from "qs";
 
 export default {
   data(){
