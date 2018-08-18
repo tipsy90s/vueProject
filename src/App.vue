@@ -2,13 +2,13 @@
   <div id="mainPage" ref="mainPage">
     <h2>Hello,I'm your eyes!</h2>
     <h4>
-      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
-      My Browser 
+      &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+      My Browser
     </h4>
     <input id= "inputIn" type="text" v-model="message" placeholder="do what you want !" ref="changeValues"  @input="renderInput" />
     <button id="seachButton" type="submit" @click="searchKey" ><a ref="forSearch" id="forSearch" href="javascript:void(0)">搜索</a></button>
    <div id="list">
-     <ul id="valueList" ref="getValues"> 
+     <ul id="valueList" ref="getValues">
         <li v-for="msg in msgs">
           <a href="javascript:void(0)"  @click="getValue">{{ msg }}</a>
         </li>
@@ -17,7 +17,7 @@
 
     <div id="nav">
       <router-link to="/webs">名站大全</router-link>
-       &nbsp &nbsp &nbsp &nbsp 
+       &nbsp &nbsp &nbsp &nbsp
       <router-link to="/videos">影视大全</router-link></router-link>
        &nbsp &nbsp &nbsp &nbsp
       <router-link to="/music">众听音乐</router-link>
@@ -42,7 +42,7 @@ export default {
 
   //生命周期
   created(){
-    
+
   },
   methods:{
 
@@ -59,7 +59,7 @@ export default {
     this.msgs = resultData;
     },
 
-    renderInput(){    
+    renderInput(){
      //input框里拿到的值替换到 url 上。
       let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" +  this.message  + "&json=1&cb=lgd";
       const that = this;
@@ -89,7 +89,7 @@ export default {
         this.$refs.forSearch.href = "https://www.baidu.com/s?wd=" + this.$refs.changeValues.value;
       }
     },
-    
+
     getValue(){
       let inputValue = this.$refs.changeValues;
       this.$refs.getValues.onclick = function(event){
