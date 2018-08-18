@@ -9,23 +9,24 @@
 
 <script>
 
-export default({
-    data(){
-        return {
-            mesg:"nihao",
-            title:{
-                id:1,
-                id:2,
-            },
-        }
-    },
+export default {
+  data() {
+    return {
+      mesg: "nihao",
 
-   methods:{
-    
-    },
-})
+      title: {
+        id: 1,
+      },
+    };
+  },
+
+  methods: {
+
+  },
+};
+
 </script>
 
 <style>
-  
+
 </style>
