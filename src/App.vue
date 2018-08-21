@@ -16,38 +16,34 @@
    </div>
 
     <div id="nav">
-      <router-link to="/webs">名站大全</router-link>
+      <router-link to="/">名站大全</router-link>
        &nbsp &nbsp &nbsp &nbsp
-      <router-link to="/videos">影视大全</router-link></router-link>
+      <router-link to="/videos">影视大全</router-link>
        &nbsp &nbsp &nbsp &nbsp
       <router-link to="/music">众听音乐</router-link>
        &nbsp &nbsp &nbsp &nbsp
-       <router-link to="/news">新闻头条</router-link></router-link>
+       <router-link to="/news">新闻头条</router-link>
       <router-view></router-view>
     </div>
   </div>
 </template>
 <script>
-const time = new Date().toLocaleTimeString();
-
-// import qs from "qs";
 
 export default {
-  data(){
-    return{
-      message:'',
-      msgs:[],
-    }
-  },
+    data(){
+      return{
+        message:'',
+        msgs:[],
+      }
+    },
 
   //生命周期
-  created(){
+    created(){
 
-  },
+    },
   methods:{
-
     filterData(res){
-      // console.log(valuee);
+      console.log(res);
       var restData = [];
       var resultData = [];
       let num1 = res.data.indexOf('(');
@@ -64,18 +60,14 @@ export default {
       let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" +  this.message  + "&json=1&cb=lgd";
       const that = this;
       // console.log('that.filterData outer of axios scope:', that.filterData)
-      this.$axios.get(url,{
-        params:{
-          count:5,
-          start:1,
-        }
-      })
+      this.$axios.get(url
+      )
       .then(res => {
       // console.log(res);
       // console.log('this in axios scope:', this)
       // console.log('this.filterData in axios scope:', this.filterData)
       // console.log('that.filterData in axios scope:', that.filterData)
-      that.filterData(res)
+        that.filterData(res)
       })
       .catch(error => {
         console.log(error);
@@ -84,7 +76,7 @@ export default {
 
     searchKey(){
       if(this.messgae != '' ){
-        console.log(this.message);
+        // console.log(this.message);
         // 将输入框的值替换到url
         this.$refs.forSearch.href = "https://www.baidu.com/s?wd=" + this.$refs.changeValues.value;
       }
