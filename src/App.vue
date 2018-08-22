@@ -167,6 +167,7 @@ export default {
     top: 5%;
     text-align: left;
     font-size: 30px;
+    margin-bottom: 10px;
   }
 
   #list {

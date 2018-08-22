@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="news-range">
       <!-- 需要渲染：covers title source -->
         <!-- <p class="reflash">您有未查看的新内容，点击查看</p> -->
           <div v-for="callbackNew in callbackNews" class="displayNews">
-            <div>
+            <div class="covers">
               <img v-bind:src="callbackNew.data.covers" class="covers">
             </div>
             <div class="titles">
@@ -55,37 +55,46 @@ export default {
       },
 
       handleNews(res){
-        this.callbackNews = res.data;
-        console.log(res.data[0].data.source);
-        console.log(res.data[0].data.title);
-        console.log(res.data[0].data.covers);
+        console.log(res);
+        for(var i = 0;i<this.res.data.length;i++){
+          if(this.res.data[i].data.covers && this.res.data[i].data){
+            this.callbackNews = this.res.data[i];
+          }
+        }
       }
-    },
 
+    },
 }
 </script>
 
 <style>
-.reflash {
-  background:#FFD39B;
-  font-size: 20px;
+.news-range {
   width: 900px;
+  height: 768px;
   /* text-align: center; */
 }
 
-.covers {
+.coverImages {
   width: 250px;
   height: 150px;
+}
+
+.covers {
+  width: 248px;
+  height: 148px;
+  float: left;
+  /* margin-bottom: 7px; */
 }
 
 .titles {
   width: 600px;
   font-size: 30px;
+  float: left;
+  margin-left: 20px;
 }
 
 .displayNews {
   width: 880px;
-  float: left;
 }
 
 </style>
