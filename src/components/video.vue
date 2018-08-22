@@ -17,9 +17,6 @@ export default {
     data(){
         return {
           page:{
-              id:1,
-              id:2,
-              id:3,
               id:4,
           },
           images:"",
@@ -40,7 +37,7 @@ export default {
         // images = res.image;
         // movieNames = res.display.hot[0].movieName;
     },
-    
+
     get360RankedVideos(res){
         console.log(res);
         console.log(res.display.hot[0].movieName);
