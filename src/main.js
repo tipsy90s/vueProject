@@ -1,5 +1,7 @@
 //引入vue
 import Vue from 'vue';
+import VueJsonp from 'vue-jsonp'
+Vue.use(VueJsonp)
 
 //引入App.vue
 import App from './App.vue';

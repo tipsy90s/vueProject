@@ -5,7 +5,7 @@
             <span class="pageRight">上一页</span>
             <span v-for="pages in page.id">{{ pages }}</span>
             <span class="pageLeft">下一页</span>
-            <p @click="render">click</p>
+            <button @click="fetchVideos">获取最新视频信息</button>
         </div>
         <div>
             <image>{{ images }}</image>
@@ -15,33 +15,47 @@
 </template>
 <script>
 export default {
-    data(){
-        return {
-          page:{
-              id:1,
-          },
-          images:"",
-          movieNames:"",
-        }
-    },
+  data() {
+    return {
+      page:{
+        id:1,
+      },
+      images:"",
+      movieNames:"",
+    };
+  },
 
   methods: {
-    render(){
-        let url= this.HOST + "//open.onebox.so.com/dataApi?&tpl=2&callback=lgd.cb.get360RankedVideos&_1528902170281&query=%E7%BB%BC%E8%89%BA&url=%E7%BB%BC%E8%89%BA%E6%8E%92%E8%A1%8C&type=relation_variety_rank&src=onebox&num=1&addInfo=types:%E5%85%A8%E9%83%A8|region:%E5%85%A8%E9%83%A8|year:%E5%85%A8%E9%83%A8|limit:10|page:1";
-        this.$axios.get(url)
-        .then(res => {
-            this.get360RankedVideos(res)
-            })
-        .catch(error)(error =>{
-            console.log(error)
+    fetchVideos() {
+      const url= "http://open.onebox.so.com/dataApi";
+
+      const options = {
+        callbackQuery: 'callback',
+
+        tpl: 2,
+        query: '综艺',
+        url: '综艺排行',
+        type: 'relation_variety_rank',
+        src: 'onebox',
+        num: 1,
+        addInfo: 'types:全部|region:全部|year:全部|limit:10|page:1'
+      };
+
+      this.$jsonp(url, options)
+        .then(response => {
+          this.renderVideos(response)
         })
-        // images = res.image;
-        // movieNames = res.display.hot[0].movieName;
+        .catch(error =>{
+          console.error('fetchVideos with error:', error)
+        });
+      // images = response.image;
+      // movieNames = response.display.hot[0].movieName;
     },
 
-    get360RankedVideos(res){
-        console.log(res);
-        // console.log(res.display.hot[0].movieName);
+    renderVideos(response){
+      console.log('fetchVideos with response:', response)
+
+      // console.log(response.display.hot[0].movieName);
     }
   }
 }
