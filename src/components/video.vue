@@ -1,15 +1,19 @@
 <template>
-    <div>
+    <div class="displayVideos">
         <div id="nav">
             <span>来自360搜索综艺排行榜</span>
             <span class="pageRight">上一页</span>
             <span v-for="pages in page.id">{{ pages }}</span>
             <span class="pageLeft">下一页</span>
-            <button @click="fetchVideos">获取最新视频信息</button>
         </div>
-        <div>
-            <image>{{ images }}</image>
-            <p>{{ movieNames }}</p>
+
+        <div class="videosDisplay" v-for = "hotMovie in hotMovies">
+          <div class="images">
+            <img v-bind:src="hotMovie.imgurl" class="imgs">
+          </div>
+          <div class="titles" scoped>
+            <p>{{ hotMovie.moviename }}</p>
+          </div>
         </div>
     </div>
 </template>
@@ -20,15 +24,17 @@ export default {
       page:{
         id:1,
       },
-      images:"",
-      movieNames:"",
+      hotMovies:[],
     };
+  },
+
+  mounted(){
+    this.fetchVideos()
   },
 
   methods: {
     fetchVideos() {
       const url= "http://open.onebox.so.com/dataApi";
-
       const options = {
         callbackQuery: 'callback',
 
@@ -53,10 +59,11 @@ export default {
     },
 
     renderVideos(response){
-      console.log('fetchVideos with response:', response)
-
+      console.log('fetchVideos with response:', response.display.hot);
+      this.hotMovies = response.display.hot;
+      console.log()
       // console.log(response.display.hot[0].movieName);
-    }
+    },
   }
 }
 </script>
@@ -77,4 +84,41 @@ span {
     top: 0;
     left: 40%;
 }
+
+.images{
+  width: 150px;
+  height: 200px;
+  margin: 0 auto;
+  z-index:2;
+  /* background:white; */
+}
+
+ .titles p{
+  margin-top: 10px;
+  margin-right: 1px;
+  margin-bottom: 0;
+  margin-left: 1px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.videosDisplay{
+  width:152px;
+  height:238px;
+  float: left;
+  margin:7px;
+  border: 3px solid aquamarine;
+}
+
+.imgs{
+  width: 100%;
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.displayVideos{
+  width: 880px;
+  height:100%;
+}
+
 </style>

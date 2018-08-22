@@ -43,24 +43,23 @@ export default {
     },
   methods:{
     filterData(res){
-      console.log(res);
-      var restData = [];
-      var resultData = [];
-      let num1 = res.data.indexOf('(');
-      let num2 = res.data.indexOf(')');
-      let resData = JSON.parse(res.data.substring(num1 + 1, num2));
-      for (var i=0;i<resData.s.length;i++){
-        resultData[i] = resData.g[i].q;
-    }
-    this.msgs = resultData;
+    this.msgs = res.s;
     },
 
     renderInput(){
      //input框里拿到的值替换到 url 上。
-      let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" +  this.message  + "&json=1&cb=lgd";
+      const url = "http://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su";
+
+      const options = {
+        callbackQuery: 'cb',
+        // callbackName: 'callback', 加上报错。
+        wd: this.message,
+        json: '1',
+      }
+      // let url = this.HOST + "//sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" +  this.message  + "&json=1&cb=lgd";
       const that = this;
       // console.log('that.filterData outer of axios scope:', that.filterData)
-      this.$axios.get(url
+     that.$jsonp(url,options
       )
       .then(res => {
       // console.log(res);
@@ -104,7 +103,7 @@ export default {
     background-image: url(../photos/7.jpg);
     background-size: 100% 100%;
     font-family: hakuyoxingshu7000;
-    z-index: 1;
+    z-index:0;
   }
 
   h2,h4 {

@@ -11,13 +11,13 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api':{
-        target:'https://www.lgd.com',    //设置网络地址的调用的接口域名和端口号（特定的代理）
-        changeOrigin:true, //是否跨域 映射一个HOSt结果
-        pathRewrite:{
-          '^/api': ''
-        }
-      }
+      // '/api':{
+      //   target:'https://localhost:8080/',    //设置网络地址的调用的接口域名和端口号（特定的代理）
+      //   changeOrigin:true, //是否跨域 映射一个HOSt结果
+      //   pathRewrite:{
+      //     '^/api': ''
+      //   }
+      // }
     },
 
     // Various Dev Server settings
