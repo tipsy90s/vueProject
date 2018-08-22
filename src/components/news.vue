@@ -56,9 +56,9 @@ export default {
 
       handleNews(res){
         console.log(res);
-        for(var i = 0;i<this.res.data.length;i++){
-          if(this.res.data[i].data.covers && this.res.data[i].data){
-            this.callbackNews = this.res.data[i];
+        for(var i = 0;i < res.data.length;i++){
+          if(res.data[i].data.covers && res.data[i].data){
+            this.callbackNews = res.data[i];
           }
         }
       }
