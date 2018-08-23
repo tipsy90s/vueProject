@@ -2,13 +2,14 @@
     <div class="news-range">
       <!-- 需要渲染：covers title source -->
         <!-- <p class="reflash">您有未查看的新内容，点击查看</p> -->
-          <div v-for="callbackNew in callbackNews" class="displayNews">
-            <div class="covers">
-              <img v-bind:src="callbackNew.data.covers" class="covers">
-            </div>
+          <div v-for="news in newsList" class="displayNews" v-if="newsList.length">
+            <a v-bind:href="news.url" class="covers">
+              <img v-bind:src="news.cover" class="covers">
+            </a>
+
             <div class="titles">
-              <p> {{callbackNew.data.title}} </p>
-              <p>{{callbackNew.data.source}}</p>
+              <p>{{ news.title }} </p>
+              <p>{{ news.source }}</p>
             </div>
           </div>
     </div>
@@ -16,20 +17,26 @@
 
 <script>
 export default {
-    data(){
+    data() {
       return {
-        callbackNews:[],
+        newsList: [],
       }
     },
 
     mounted(){
-      this.renderNews()
+      this.fetchNews()
+        .then((data) => {
+          return this.formatNews(data);
+        })
+        .then((newsList) => {
+          this.renderNews(newsList);
+        });
     },
 
     methods:{
-
-      renderNews(){
+      fetchNews(){
         const url = "https://pc.api.btime.com/btimeweb/getInfoFlow";
+
         const options = {
           callbackQuery: 'callback',
           channel: 'news',
@@ -42,27 +49,37 @@ export default {
           pid: 3,
           from: '',
           page_refresh_id: 'bdd83c10-6f19-11e8-8796-6c92bf0a9cdb',
-          _: 1528901698882,
+          _: new Date().getTime(),
         }
 
-        this.$jsonp(url,options)
-        .then(res => {
-          this.handleNews(res)
-        })
-        .catch(error => {
-          console.log(error);
-        })
+        return this.$jsonp(url, options)
+          .then((response) => response.data)
+          .catch((error) => {
+            console.error('fetchNews with error:', error);
+          });
       },
 
-      handleNews(res){
-        console.log(res);
-        for(var i = 0;i < res.data.length;i++){
-          if(res.data[i].data.covers && res.data[i].data){
-            this.callbackNews = res.data[i];
-          }
-        }
-      }
+      formatNews(data) {
+        console.log('data:', data);
 
+        return data
+          .filter(info => (info.data && info.data.covers && info.data.covers.length))
+          .map((info) => {
+            const innerData = info.data;
+
+            return {
+              title: innerData.title,
+              cover: innerData.covers[0],
+              source: innerData.source,
+              url: info.url,
+            };
+          });
+      },
+
+      renderNews(newsList) {
+        console.log('newsList:', newsList);
+        this.newsList = newsList;
+      }
     },
 }
 </script>
