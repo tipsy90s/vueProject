@@ -3,12 +3,14 @@
       <!-- 需要渲染：covers title source -->
         <!-- <p class="reflash">您有未查看的新内容，点击查看</p> -->
           <div v-for="callbackNew in callbackNews" class="displayNews">
+            <div v-if = "callbackNew.data.covers">
             <div class="covers">
               <img v-bind:src="callbackNew.data.covers" class="covers">
             </div>
             <div class="titles">
-              <p> {{callbackNew.data.title}} </p>
-              <p>{{callbackNew.data.source}}</p>
+              <a v-bind:href="callbackNew.open_url"><p> {{callbackNew.data.title}} </p></a>
+              <p>{{callbackNew.data.source}}  {{ callbackNew.data.pdata_str }}</p>
+            </div>
             </div>
           </div>
     </div>
@@ -56,18 +58,20 @@ export default {
 
       handleNews(res){
         console.log(res);
-        for(var i = 0;i < res.data.length;i++){
-          if(res.data[i].data.covers && res.data[i].data){
-            this.callbackNews = res.data[i];
-          }
-        }
+        console.log(res.data);
+        console.log(res.data[3].data.covers);
+        // for(var i = 0;i < res.data.length;i++){
+        //   if(res.data[i].data.covers){
+            this.callbackNews = res.data;
+        //   }
+        // }
       }
 
     },
 }
 </script>
 
-<style>
+<style scoped>
 .news-range {
   width: 900px;
   height: 768px;

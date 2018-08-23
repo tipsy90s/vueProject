@@ -8,12 +8,14 @@
         </div>
 
         <div class="videosDisplay" v-for = "hotMovie in hotMovies">
-          <div class="images">
-            <img v-bind:src="hotMovie.imgurl" class="imgs">
-          </div>
-          <div class="titles" scoped>
-            <p>{{ hotMovie.moviename }}</p>
-          </div>
+          <a v-bind:href="hotMovie.m_url">
+            <div class="images">
+              <img v-bind:src="hotMovie.imgurl" class="imgs">
+            </div>
+            <div class="titles" scoped>
+              <p>{{ hotMovie.moviename }}</p>
+            </div>
+          </a>
         </div>
     </div>
 </template>
@@ -68,7 +70,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 span {
     font-size: 20px;
 }

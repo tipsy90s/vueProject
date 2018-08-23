@@ -100,7 +100,7 @@ export default {
     height: 640px;
     background-repeat: no-repeat;
     text-align: center;
-    background-image: url(../photos/7.jpg);
+    background-image: url(../photos/10.jpg);
     background-size: 100% 100%;
     font-family: hakuyoxingshu7000;
     z-index:0;
