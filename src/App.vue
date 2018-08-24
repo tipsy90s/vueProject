@@ -16,13 +16,13 @@
    </div>
 
     <div id="nav">
-      <router-link to="/">名站大全</router-link>
+      <router-link to="/"><b>名站大全</b></router-link>
        &nbsp &nbsp &nbsp &nbsp
-      <router-link to="/videos">影视大全</router-link>
+      <router-link to="/videos"><b>影视大全</b></router-link>
        &nbsp &nbsp &nbsp &nbsp
-      <router-link to="/music">众听音乐</router-link>
+      <router-link to="/music"><b>众听音乐</b></router-link>
        &nbsp &nbsp &nbsp &nbsp
-       <router-link to="/news">新闻头条</router-link>
+       <router-link to="/news"><b>新闻头条</b></router-link>
       <router-view></router-view>
     </div>
   </div>
@@ -100,7 +100,7 @@ export default {
     height: 640px;
     background-repeat: no-repeat;
     text-align: center;
-    background-image: url(../photos/10.jpg);
+    background-image: url(../photos/7.jpg);
     background-size: 100% 100%;
     font-family: hakuyoxingshu7000;
     z-index:0;
