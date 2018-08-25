@@ -7,7 +7,7 @@
             <span @click = "nextPage">下一页</span>
         </div>
 
-        <div class="videosDisplay" v-for = "hotMovie in hotMovies" res="backgroundColor" style= "">
+        <div class="videosDisplay" v-for = "hotMovie in hotMovies" ref="backgroundColor" @mouseover="mouseOver" style= "">
           <a v-bind:href="hotMovie.m_url">
             <div class="images">
               <img v-bind:src="hotMovie.imgurl" class="imgs">
@@ -79,10 +79,11 @@ export default {
       return this.fetchVideos(page);
     },
 
-    // mouseOver(){
-    //   this.$refs.backgroundColor.style = "background:yellow;border-color:yellow;";
-    // }
+    mouseOver(){
+      console.log('this.$refs.backgroundColor:', this.$refs.backgroundColor);
 
+      this.$refs.backgroundColor[0].style = 'background-color:yellow;border-color:yellow;';
+    }
   }
 }
 </script>
