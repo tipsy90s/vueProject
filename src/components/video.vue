@@ -7,7 +7,7 @@
             <span @click = "nextPage">下一页</span>
         </div>
 
-        <div class="videosDisplay" v-for="(hotMovie,index)in hotMovies" ref="backgroundColor" @mouseover="mouseOver" style= "">
+        <div class="videosDisplay" v-for="(hotMovie,index) in hotMovies" ref="backgroundColor" @mouseover="mouseOver" style= "">
           <a v-bind:href="hotMovie.m_url">
             <div class="images">
               <img v-bind:src="hotMovie.imgurl" class="imgs">
