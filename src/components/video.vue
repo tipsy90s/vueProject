@@ -7,7 +7,7 @@
             <span @click = "nextPage">下一页</span>
         </div>
 
-        <div class="videosDisplay" v-for="(hotMovie,index) in hotMovies" ref="backgroundColor" @mouseover="mouseOver(index)" @mouseleave="mouseOut(index)" style= "">
+        <div class="videosDisplay" v-for="hotMovie in hotMovies"  @mouseover="mouseOver($event)" @mouseleave="mouseOut($event)" style= "">
           <a v-bind:href="hotMovie.m_url">
             <div class="images">
               <img v-bind:src="hotMovie.imgurl" class="imgs">
@@ -17,7 +17,7 @@
             </div>
           </a>
         </div>
-    </div>
+      </div>
 </template>=
 <script>
 export default {
@@ -79,14 +79,13 @@ export default {
       return this.fetchVideos(page);
     },
 
-    mouseOver(index){
-      console.log('this.$refs.backgroundColor:', this.$refs.backgroundColor);
-      this.$refs.backgroundColor[index].style = 'background-color:yellow;border-color:yellow;';
+    mouseOver(event){
+      event.currentTarget.style = 'background-color:yellow;border-color:yellow;';
     },
 
 
-    mouseOut(index){
-      this.$refs.backgroundColor[index].style = '';
+    mouseOut(event){
+      event.currentTarget.style = ''; //event.target  当前元素  event.currentTarget 元素的父元素
     },
   }
 }

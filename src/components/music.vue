@@ -10,7 +10,7 @@
     <!-- <span class="page-style">|</span> -->
     <div class="search-music">
       <input style="display:none" ref="inputDisplay">
-      <button @click="input"><img src="../../photos/search.png"></button>
+      <button @click="input()"><img src="../../photos/search.png"></button>
     </div>
   </div>
 </template>

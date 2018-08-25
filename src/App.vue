@@ -6,7 +6,7 @@
       My Browser
     </h4>
     <input id= "inputIn" type="text" v-model="message" placeholder="do what you want !" ref="changeValues"  @input="renderInput" />
-    <button id="seachButton" type="submit" @click="searchKey" ><a ref="forSearch" id="forSearch" href="javascript:void(0)">搜索</a></button>
+    <button id="seachButton" type="submit" @click="searchKey($event)" ><a  id="forSearch" href="javascript:void(0)">搜索</a></button>
    <div id="list">
      <ul id="valueList" ref="getValues">
         <li v-for="msg in msgs">
@@ -73,11 +73,11 @@ export default {
       })
     },
 
-    searchKey(){
+    searchKey(event){
       if(this.messgae != '' ){
         // console.log(this.message);
         // 将输入框的值替换到url
-        this.$refs.forSearch.href = "https://www.baidu.com/s?wd=" + this.$refs.changeValues.value;
+        event.target.href = "https://www.baidu.com/s?wd=" + this.$refs.changeValues.value;
       }
     },
 
