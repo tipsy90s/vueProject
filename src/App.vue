@@ -102,7 +102,7 @@ export default {
     text-align: center;
     background-image: url(../photos/7.jpg);
     background-size: 100% 100%;
-    font-family: hakuyoxingshu7000;
+    font-family:  arial;
     z-index:0;
   }
 

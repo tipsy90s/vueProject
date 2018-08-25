@@ -2,12 +2,12 @@
     <div class="displayVideos">
         <div id="nav">
             <span>来自360搜索综艺排行榜</span>
-            <span class="pageRight">上一页</span>
-            <span v-for="pages in page.id">{{ pages }}</span>
-            <span class="pageLeft">下一页</span>
+            <span >上一页</span>
+            <span v-for="page in pages" class="page-number" @click = "changePages">{{ page }}</span>
+            <span @click = "nextPage">下一页</span>
         </div>
 
-        <div class="videosDisplay" v-for = "hotMovie in hotMovies">
+        <div class="videosDisplay" v-for = "hotMovie in hotMovies" res="backgroundColor" @mouseover = "mouseOver" style= "">
           <a v-bind:href="hotMovie.m_url">
             <div class="images">
               <img v-bind:src="hotMovie.imgurl" class="imgs">
@@ -23,9 +23,8 @@
 export default {
   data() {
     return {
-      page:{
-        id:1,
-      },
+      i :1,
+      pages:[],
       hotMovies:[],
     };
   },
@@ -63,28 +62,46 @@ export default {
     renderVideos(response){
       console.log('fetchVideos with response:', response.display.hot);
       this.hotMovies = response.display.hot;
-      console.log()
-      // console.log(response.display.hot[0].movieName);
+      for(this.i;this.i < 7;this.i++){
+        this.pages = this.i;
+      }
     },
+
+    nextPage(){
+      this.i = this.i+6;
+      return this.i;
+      console.log(this.i);
+    },
+
+    changePages(){
+      console.log(page);
+      // return fetchVideos();
+
+    },
+
+    mouseOver(){
+      this.$refs.backgroundColor.style = "background:yellow;border-color:yellow;";
+    }
+
   }
 }
 </script>
 
 <style scoped>
 span {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .pageRight {
-    position: relative;
-    top: 0;
-    left: 30%;
+  position: relative;
+  top: 0;
+  left: 30%;
 }
 
 .pageLeft {
-    position: relative;
-    top: 0;
-    left: 40%;
+  position: relative;
+  top: 0;
+  left: 40%;
 }
 
 .images{
@@ -121,6 +138,11 @@ span {
 .displayVideos{
   width: 880px;
   height:100%;
+}
+
+#nav {
+  position: relative;
+  left: 0;
 }
 
 </style>
