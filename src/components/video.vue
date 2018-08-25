@@ -3,11 +3,11 @@
         <div id="nav">
             <span>来自360搜索综艺排行榜</span>
             <span >上一页</span>
-            <span v-for="page in pages" class="page-number" @click = "changePages">{{ page }}</span>
+            <span v-for="page in pages" class="page-number" @click = "changePageTo(page)">{{ page }}</span>
             <span @click = "nextPage">下一页</span>
         </div>
 
-        <div class="videosDisplay" v-for = "hotMovie in hotMovies" res="backgroundColor" @mouseover = "mouseOver" style= "">
+        <div class="videosDisplay" v-for = "hotMovie in hotMovies" res="backgroundColor" style= "">
           <a v-bind:href="hotMovie.m_url">
             <div class="images">
               <img v-bind:src="hotMovie.imgurl" class="imgs">
@@ -34,7 +34,7 @@ export default {
   },
 
   methods: {
-    fetchVideos() {
+    fetchVideos(page) {
       const url= "http://open.onebox.so.com/dataApi";
       const options = {
         callbackQuery: 'callback',
@@ -45,7 +45,7 @@ export default {
         type: 'relation_variety_rank',
         src: 'onebox',
         num: 1,
-        addInfo: 'types:全部|region:全部|year:全部|limit:10|page:1'
+        addInfo: `types:全部|region:全部|year:全部|limit:10|page:${page}`
       };
 
       this.$jsonp(url, options)
@@ -73,15 +73,15 @@ export default {
       console.log(this.i);
     },
 
-    changePages(){
-      console.log(page);
-      // return fetchVideos();
+    changePageTo(page){
+      console.log('changePageTo', page);
 
+      return this.fetchVideos(page);
     },
 
-    mouseOver(){
-      this.$refs.backgroundColor.style = "background:yellow;border-color:yellow;";
-    }
+    // mouseOver(){
+    //   this.$refs.backgroundColor.style = "background:yellow;border-color:yellow;";
+    // }
 
   }
 }
